@@ -4,11 +4,13 @@ import Feed from "./Components/Feed/Feed";
 import VideoDetail from "./Components/VideoDetail/VideoDetail";
 import ChannelDetail from "./Components/ChannelDetail/ChannelDetail";
 import SearchFeed from "./Components/SearchFeed/SearchFeed";
+import Navbar from "./Components/Navbar/Navbar";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Box sx={{ backgroundColor: "#000" }}>hello</Box>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Feed />} />
         {/* /video/:id need to understand */}
