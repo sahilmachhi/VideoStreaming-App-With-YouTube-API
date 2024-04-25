@@ -1,6 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Sidebar from "../Sidebar/Sidebar";
+import { Typography } from "@mui/material";
 
 function Feed() {
   return (
@@ -22,6 +23,11 @@ function Feed() {
         }}
       >
         <Sidebar />
+      </Box>
+      <Box>
+        <Typography variant="h4">
+          <span style={{ color: "#F31503" }}>Videos</span>
+        </Typography>
       </Box>
     </Stack>
   );

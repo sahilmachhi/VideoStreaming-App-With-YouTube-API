@@ -15,7 +15,13 @@ const Navbar = () => {
         justifyContent: "space-between",
       }}
     >
-      <Link to="/" style={{ display: "flex", alignItems: "center" }}></Link>
+      <Link
+        to="/"
+        style={{ display: "flex", alignItems: "center" }}
+        className="text-4xl text-white font-extrabold"
+      >
+        home
+      </Link>
       <SearchBar />
     </Stack>
   );

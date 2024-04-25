@@ -24,7 +24,7 @@ function SearchBar() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <IconButton type={searchSubmit}>
+        <IconButton>
           <SearchIcon />
         </IconButton>
       </Paper>
