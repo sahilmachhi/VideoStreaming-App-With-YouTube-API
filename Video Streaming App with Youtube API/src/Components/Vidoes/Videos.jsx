@@ -1,7 +1,7 @@
 import { Box, Stack } from "@mui/material";
 import VideoCard from "../VideoCard/VideoCard";
 import ChannelCard from "../ChannelCard/ChannelCard";
-import { propTypes } from "prop-types";
+import { PropTypes } from "prop-types";
 
 function Videos({ videos }) {
   console.log(videos);
@@ -22,7 +22,7 @@ function Videos({ videos }) {
 }
 
 Videos.propTypes = {
-  videos: propTypes.array.isRequired,
+  videos: PropTypes.array.isRequired,
 };
 
 export default Videos;

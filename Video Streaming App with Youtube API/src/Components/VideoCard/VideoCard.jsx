@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { propTypes } from "prop-types";
+import PropTypes from "prop-types";
 function VideoCard({
   video: {
     id: { videoId },
@@ -18,25 +18,22 @@ function VideoCard({
       <Link
         className="text-white"
         to={videoId ? `/video/${videoId}` : "/video/noId"}
-      >
-        {" "}
-        {}
-      </Link>
+      ></Link>
     </>
   );
 }
 
 VideoCard.propTypes = {
-  video: propTypes.shape({
-    id: propTypes.shape({
-      videoId: propTypes.string.isRequired,
+  video: PropTypes.shape({
+    id: PropTypes.shape({
+      videoId: PropTypes.string.isRequired,
     }),
-    snippet: propTypes.shape({
-      channelTitle: propTypes.string.isRequired,
-      publishTime: propTypes.string.isRequired,
-      thumbnails: propTypes.shape({
-        default: propTypes.shape({
-          url: propTypes.string.isRequired,
+    snippet: PropTypes.shape({
+      channelTitle: PropTypes.string.isRequired,
+      publishTime: PropTypes.string.isRequired,
+      thumbnails: PropTypes.shape({
+        default: PropTypes.shape({
+          url: PropTypes.string.isRequired,
         }),
       }),
     }),
