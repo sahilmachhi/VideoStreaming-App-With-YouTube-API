@@ -15,7 +15,11 @@ function SearchBar() {
         component="form"
         onSubmit={searchSubmit}
         className="px-6 pl-3 border-e3e3e3 border-4 shadow-none flex items-center justify-center"
-        sx={{ borderRadius: 10, backgroundColor: "white" }}
+        sx={{
+          borderRadius: 10,
+          backgroundColor: "white",
+          display: { xs: "none", sx: "block" },
+        }}
       >
         <input
           type="text"

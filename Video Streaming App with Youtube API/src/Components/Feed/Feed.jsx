@@ -9,7 +9,6 @@ function Feed() {
   const [category, setCategory] = useState("New");
   const [videos, setVideos] = useState([]);
   useEffect(() => {
-    setVideos([]);
     fetchFromAPI(`search?part=snippet&q=${category}`).then((data) =>
       setVideos(data.items)
     );
