@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import PropTypes from "prop-types";
 import { Card, CardMedia, CardContent, Typography } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 function VideoCard({ video }) {
@@ -10,7 +10,7 @@ function VideoCard({ video }) {
     <>
       <Card
         sx={{
-          width: { md: "320px", xs: "100%" },
+          width: { md: "340px", lg: "358px", sm: "320px", xs: "280px" },
           boxShadow: "none",
           borderRadius: "5px",
           overflow: "hidden",
@@ -51,5 +51,21 @@ function VideoCard({ video }) {
     </>
   );
 }
-
+VideoCard.propTypes = {
+  video: PropTypes.shape({
+    id: PropTypes.shape({
+      videoId: PropTypes.string.isRequired,
+    }).isRequired,
+    snippet: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      channelId: PropTypes.string.isRequired,
+      channelTitle: PropTypes.string.isRequired,
+      thumbnails: PropTypes.shape({
+        high: PropTypes.shape({
+          url: PropTypes.string.isRequired,
+        }).isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 export default VideoCard;

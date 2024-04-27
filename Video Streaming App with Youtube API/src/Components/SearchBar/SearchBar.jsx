@@ -18,7 +18,7 @@ function SearchBar() {
         sx={{
           borderRadius: 10,
           backgroundColor: "white",
-          display: { xs: "none", sx: "block" },
+          display: { xs: "none", md: "block" },
         }}
       >
         <input

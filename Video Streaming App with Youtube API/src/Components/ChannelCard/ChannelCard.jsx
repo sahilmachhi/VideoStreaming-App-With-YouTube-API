@@ -1,12 +1,17 @@
-import React from "react";
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+function ChannelCard({ channelDetail, mt }) {
+  let route = channelDetail?.snippet?.channelId;
+  let route2;
+  if (!route) {
+    route2 = channelDetail?.id;
+  }
 
-function ChannelCard({ channelDetail }) {
   return (
     <>
-      <Box sx={{ boxShadow: "none", borderRadius: "20px" }}>
-        <Link to={`/channel/${channelDetail?.snippet?.channelId}`}>
+      <Box sx={{ boxShadow: "none", borderRadius: "20px", marginTop: mt }}>
+        <Link to={route ? `/channel/${route}` : `/channel/${route2}`}>
           <CardContent className="flex flex-col justify-center text-center text-white">
             <CardMedia
               image={channelDetail?.snippet?.thumbnails?.medium?.url}
@@ -27,5 +32,21 @@ function ChannelCard({ channelDetail }) {
     </>
   );
 }
+
+ChannelCard.propTypes = {
+  channelDetail: PropTypes.shape({
+    id: PropTypes.string,
+    snippet: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      thumbnails: PropTypes.shape({
+        medium: PropTypes.shape({
+          url: PropTypes.string.isRequired,
+        }).isRequired,
+      }).isRequired,
+      channelId: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  mt: PropTypes.string,
+};
 
 export default ChannelCard;

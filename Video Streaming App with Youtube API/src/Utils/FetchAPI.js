@@ -10,12 +10,7 @@ const options = {
     }
 };
 
-
 export const fetchFromAPI = async (url) => {
     const { data } = await axios.get(`${URL}/${url}`, options);
     return data;
 };
-
-
-
-console.log(import.meta.env.VITE_RAPID_API_KEY)

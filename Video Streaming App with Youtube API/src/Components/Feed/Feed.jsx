@@ -33,12 +33,22 @@ function Feed() {
       >
         <Sidebar category={category} setCategory={setCategory} />
       </Box>
-      <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
+      <Box
+        sx={{
+          overflowY: "auto",
+          height: "90vh",
+          flex: 2,
+          paddingLeft: { sm: "2rem", xs: "0.8rem", md: "6rem" },
+        }}
+      >
         <Typography
           variant="h4"
           fontWeight="bold"
           mb={2}
-          sx={{ color: "white" }}
+          textAlign="left"
+          sx={{
+            color: "white",
+          }}
         >
           {category}
           <span style={{ color: "#F31503" }}> Videos</span>
