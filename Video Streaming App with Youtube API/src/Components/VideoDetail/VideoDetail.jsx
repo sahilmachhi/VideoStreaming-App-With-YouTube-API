@@ -5,28 +5,31 @@ import { useParams } from "react-router-dom";
 import { fetchFromAPI } from "../../Utils/FetchAPI";
 import { Link } from "react-router-dom";
 import { CheckCircle } from "@mui/icons-material";
+import Videos from "../Vidoes/Videos";
 
 function VideoDetail() {
   let [videoDetail, setVideoDetail] = useState({});
   let videoId = useParams().id;
   console.log(videoId);
+  let [videos, setVideos] = useState([]);
 
   useEffect(() => {
     fetchFromAPI(`videos?part=snippet,statistics&id=${videoId}`).then((data) =>
       setVideoDetail(data.items[0])
     );
+    fetchFromAPI(
+      `search?part=snippet&type=video&relatedToVideoId=${videoId}`
+    ).then((data) => setVideos(data.items));
   }, [videoId]);
   console.log(videoDetail);
-  // if (!videoDetail) {
-  //   videoDetail = "loading";
-  // }
+  console.log("videos:", videos);
 
   return (
     <>
       <Box minHeight="95vh">
         <Stack direction={{ xs: "column", md: "row" }}>
           <Box flex={1}>
-            <Box sx={{ width: "100%", position: "sticky", top: "86px" }}>
+            <Box sx={{ width: "100%", position: "sticky" }}>
               <ReactPlayer
                 url={`https://www.youtube.com/watch?v=${videoId}`}
                 className="react-player"
@@ -43,17 +46,7 @@ function VideoDetail() {
                   ? "loading"
                   : videoDetail?.snippet?.localized?.title}
               </Typography>
-              {/* <Typography
-                color="#fff"
-                variant="subtitle2"
-                // fontWeight="bold"
-                fontSize={20}
-                p={2}
-              >
-                {!videoDetail?.snippet?.localized?.description
-                  ? "loading"
-                  : videoDetail?.snippet?.localized?.description}
-              </Typography> */}
+
               <Stack
                 direction="row"
                 py={1}
@@ -61,7 +54,13 @@ function VideoDetail() {
                 justifyContent="space-between"
                 sx={{ color: "#fff" }}
               >
-                <Link to={`/channel/${videoId.snippet.channelId}`}>
+                <Link
+                  to={`/channel/${
+                    videoDetail?.snippet?.channelId
+                      ? videoDetail?.snippet?.channelId
+                      : null
+                  }`}
+                >
                   <Typography
                     color="#fff"
                     variant={{ sm: "subtitle1", md: "h6" }}
@@ -69,9 +68,9 @@ function VideoDetail() {
                     p={2}
                     fontSize={28}
                   >
-                    {!videoId.snippet.channelTitle
+                    {!videoDetail?.snippet?.channelTitle
                       ? "loading"
-                      : videoId.snippet.channelTitle}
+                      : videoDetail?.snippet?.channelTitle}
                     <CheckCircle
                       sx={{ fontSize: "12px", color: "grey", ml: "5px" }}
                     />
@@ -79,14 +78,40 @@ function VideoDetail() {
                 </Link>
                 <Stack direction="row" gap="20px" alignItems="center">
                   <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                    {/* write api value here */} views
+                    {videoDetail?.statistics?.viewCount
+                      ? videoDetail?.statistics?.viewCount
+                      : "loading"}{" "}
+                    views
                   </Typography>
                   <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                    {/* write api value here */} likes
+                    {videoDetail?.statistics?.likeCount
+                      ? videoDetail?.statistics?.likeCount
+                      : "loading"}{" "}
+                    likes
                   </Typography>
                 </Stack>
               </Stack>
+              <Typography
+                color="#fff"
+                variant="subtitle2"
+                // fontWeight="bold"
+                fontSize={20}
+                p={2}
+              >
+                {videoDetail?.snippet?.localized?.description
+                  ? videoDetail?.snippet?.localized?.description
+                  : "loading"}
+              </Typography>
             </Box>
+          </Box>
+          <Box
+            px={2}
+            py={{ md: 1, xs: 5 }}
+            justifyContent="center"
+            alignItems="center"
+            sx={{ overflowY: "scroll" }}
+          >
+            <Videos videos={videos} direction="column" />
           </Box>
         </Stack>
       </Box>

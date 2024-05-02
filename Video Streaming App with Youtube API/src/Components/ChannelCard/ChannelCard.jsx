@@ -13,16 +13,18 @@ function ChannelCard({ channelDetail, mt }) {
       <Box sx={{ boxShadow: "none", borderRadius: "20px", marginTop: mt }}>
         <Link to={route ? `/channel/${route}` : `/channel/${route2}`}>
           <CardContent className="flex flex-col justify-center text-center text-white">
-            <CardMedia
-              image={channelDetail?.snippet?.thumbnails?.medium?.url}
-              alt={"name"}
-              sx={{
-                width: "180px",
-                height: "180px",
-                mb: 2,
-                border: "1px solid",
-              }}
-            />
+            {channelDetail?.snippet?.thumbnails?.medium?.url ? (
+              <CardMedia
+                image={channelDetail?.snippet?.thumbnails?.medium?.url}
+                alt={"name"}
+                sx={{
+                  width: "180px",
+                  height: "180px",
+                  mb: 2,
+                  border: "1px solid",
+                }}
+              />
+            ) : null}
             <Typography variant="h6">
               {channelDetail?.snippet?.title}
             </Typography>

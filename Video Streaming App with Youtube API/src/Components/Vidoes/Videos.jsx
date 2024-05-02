@@ -3,11 +3,11 @@ import VideoCard from "../VideoCard/VideoCard";
 import ChannelCard from "../ChannelCard/ChannelCard";
 import { PropTypes } from "prop-types";
 
-function Videos({ videos }) {
+function Videos({ videos, direction }) {
   return (
     <>
       <Stack
-        direction="row"
+        direction={direction ? direction : "row"}
         flexWrap="wrap"
         justifyContent="left"
         alignItems="left"

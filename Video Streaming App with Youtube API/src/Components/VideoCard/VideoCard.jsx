@@ -10,7 +10,7 @@ function VideoCard({ video }) {
     <>
       <Card
         sx={{
-          width: { md: "340px", lg: "358px", sm: "320px", xs: "280px" },
+          width: { md: "330px", lg: "338px", sm: "320px", xs: "280px" },
           boxShadow: "none",
           borderRadius: "5px",
           overflow: "hidden",
@@ -23,7 +23,10 @@ function VideoCard({ video }) {
           <CardMedia
             image={videoDetails?.thumbnails?.high?.url}
             alt={videoDetails.title}
-            sx={{ width: 358, height: 180 }}
+            sx={{
+              width: { md: "330px", lg: "338px", sm: "320px", xs: "280px" },
+              height: 180,
+            }}
           />
         </Link>
         <CardContent sx={{ backgroundColor: "#1e1e1e", height: "106px" }}>

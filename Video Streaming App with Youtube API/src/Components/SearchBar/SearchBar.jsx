@@ -19,6 +19,9 @@ function SearchBar() {
           borderRadius: 10,
           backgroundColor: "white",
           display: { xs: "none", md: "block" },
+          overflow: "hidden",
+          zIndex: 1,
+          position: "sticky",
         }}
       >
         <input
