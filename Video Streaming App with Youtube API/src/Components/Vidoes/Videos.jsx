@@ -13,6 +13,7 @@ function Videos({ videos, direction }) {
         alignItems="left"
         // width="100%"
         gap={2}
+        className="ml-[2rem] sm:ml-[1rem] md:ml-2 lg:ml-0"
       >
         {videos.map((video, id) => {
           return (

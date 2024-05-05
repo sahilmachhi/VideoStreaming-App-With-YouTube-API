@@ -38,7 +38,7 @@ function Feed() {
           overflowY: "auto",
           height: "90vh",
           flex: 2,
-          paddingLeft: { sm: "2rem", xs: "0.8rem", md: "6rem" },
+          paddingLeft: { sm: "2rem", xs: "0.8rem", md: "2rem" },
         }}
       >
         <Typography

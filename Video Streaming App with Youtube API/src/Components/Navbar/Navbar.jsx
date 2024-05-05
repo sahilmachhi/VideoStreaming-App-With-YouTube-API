@@ -5,7 +5,7 @@ import SearchBar from "../SearchBar/SearchBar";
 const Navbar = () => {
   return (
     <Stack
-      direction="row"
+      direction={{ xs: "column", sm: "row" }}
       alignItems="center"
       p={2}
       sx={{

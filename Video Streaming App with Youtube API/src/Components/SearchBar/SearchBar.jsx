@@ -6,7 +6,8 @@ import SearchIcon from "@mui/icons-material/Search";
 function SearchBar() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const searchSubmit = () => {
+  const searchSubmit = (e) => {
+    e.preventDefault();
     navigate(`/search/${search}`);
   };
   return (
@@ -17,8 +18,8 @@ function SearchBar() {
         className="px-6 pl-3 border-e3e3e3 border-4 shadow-none flex items-center justify-center"
         sx={{
           borderRadius: 10,
-          backgroundColor: "white",
-          display: { xs: "none", md: "block" },
+          backgroundColor: "black",
+          // display: { xs: "none", md: "block" },
           overflow: "hidden",
           zIndex: 1,
           position: "sticky",
@@ -26,13 +27,13 @@ function SearchBar() {
       >
         <input
           type="text"
-          className="search-bar font-sans text-2xl py-1"
+          className="search-bar font-sans text-2xl py-1 bg-black text-white"
           placeholder="search here"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <IconButton>
-          <SearchIcon />
+          <SearchIcon className="text-white" />
         </IconButton>
       </Paper>
     </>

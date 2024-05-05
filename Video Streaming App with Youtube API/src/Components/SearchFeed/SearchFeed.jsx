@@ -7,7 +7,6 @@ import { fetchFromAPI } from "../../Utils/FetchAPI";
 import { useEffect, useState } from "react";
 function SearchFeed() {
   let searchId = useParams().searchId;
-  console.log(searchId);
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     fetchFromAPI(`search?part=snippet&q=${searchId}`).then((data) =>

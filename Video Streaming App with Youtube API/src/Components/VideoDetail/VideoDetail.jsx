@@ -10,7 +10,7 @@ import Videos from "../Vidoes/Videos";
 function VideoDetail() {
   let [videoDetail, setVideoDetail] = useState({});
   let videoId = useParams().id;
-  console.log(videoId);
+
   let [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -21,8 +21,6 @@ function VideoDetail() {
       `search?part=snippet&type=video&relatedToVideoId=${videoId}`
     ).then((data) => setVideos(data.items));
   }, [videoId]);
-  console.log(videoDetail);
-  console.log("videos:", videos);
 
   return (
     <>
@@ -63,7 +61,7 @@ function VideoDetail() {
                 >
                   <Typography
                     color="#fff"
-                    variant={{ sm: "subtitle1", md: "h6" }}
+                    variant="h2"
                     fontWeight="bold"
                     p={2}
                     fontSize={28}
