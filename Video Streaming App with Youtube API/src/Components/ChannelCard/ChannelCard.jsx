@@ -8,6 +8,20 @@ function ChannelCard({ channelDetail, mt }) {
     route2 = channelDetail?.id;
   }
 
+  let subCount = channelDetail?.statistics?.subscriberCount;
+  let sub = formatNumber(subCount);
+  function formatNumber(subCount) {
+    if (subCount < 1000) {
+      return subCount.toString();
+    } else if (subCount < 100000) {
+      return (subCount / 1000).toFixed(1) + "K";
+    } else if (subCount < 1000000) {
+      return (subCount / 100000).toFixed(1) + "L";
+    } else {
+      return (subCount / 1000000).toFixed(1) + "M";
+    }
+  }
+
   return (
     <>
       <Box sx={{ boxShadow: "none", borderRadius: "20px", marginTop: mt }}>
@@ -28,6 +42,7 @@ function ChannelCard({ channelDetail, mt }) {
             <Typography variant="h6">
               {channelDetail?.snippet?.title}
             </Typography>
+            {subCount ? <Typography>{sub} subscribers</Typography> : null}
           </CardContent>
         </Link>
       </Box>
@@ -38,6 +53,7 @@ function ChannelCard({ channelDetail, mt }) {
 ChannelCard.propTypes = {
   channelDetail: PropTypes.shape({
     id: PropTypes.string,
+    statistics: PropTypes.string,
     snippet: PropTypes.shape({
       title: PropTypes.string.isRequired,
       thumbnails: PropTypes.shape({

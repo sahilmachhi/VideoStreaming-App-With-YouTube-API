@@ -21,7 +21,7 @@ function ChannelDetail() {
       }
     );
   }, [id]);
-
+  console.log(channel);
   return (
     <Container sx={{ backgroundColor: "black" }}>
       <Box

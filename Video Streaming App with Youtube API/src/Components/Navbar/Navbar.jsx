@@ -20,7 +20,7 @@ const Navbar = () => {
         style={{ display: "flex", alignItems: "center" }}
         className="text-4xl text-white font-extrabold"
       >
-        home
+        Mini<span className="text-red-500"> Tube</span>
       </Link>
       <SearchBar />
     </Stack>

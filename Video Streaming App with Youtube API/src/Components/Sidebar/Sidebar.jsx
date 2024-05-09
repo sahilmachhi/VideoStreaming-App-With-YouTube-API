@@ -2,7 +2,7 @@ import React from "react";
 import { sideNavbar } from "../../Utils/Constants";
 import { Stack } from "@mui/material";
 
-function Sidebar({ categories, setCategory }) {
+function Sidebar({ category, setCategory }) {
   return (
     <Stack
       direction="row"
@@ -18,20 +18,20 @@ function Sidebar({ categories, setCategory }) {
             className="category-btn"
             key={cat.name}
             style={{
-              background: cat.name === categories && "#FC1503",
+              background: cat.name === category && "#FC1503",
               color: "white",
             }}
             onClick={() => setCategory(cat.name)}
           >
             <span
               style={{
-                color: cat.name === categories ? "white" : "red",
+                color: cat.name === category ? "white" : "red",
                 marginRight: "15px",
               }}
             >
               {cat.icon}
             </span>
-            <span style={{ opacity: cat.name === categories ? "1" : "0.8" }}>
+            <span style={{ opacity: cat.name === category ? "1" : "0.8" }}>
               {cat.name}
             </span>
           </button>

@@ -10,7 +10,6 @@ import Videos from "../Vidoes/Videos";
 function VideoDetail() {
   let [videoDetail, setVideoDetail] = useState({});
   let videoId = useParams().id;
-
   let [videos, setVideos] = useState([]);
 
   useEffect(() => {

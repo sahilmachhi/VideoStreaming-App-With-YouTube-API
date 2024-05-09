@@ -27,8 +27,8 @@ export const sideNavbar = [
   { name: "Beauty", icon: <FaceRetouchingNaturalIcon /> },
   { name: "Comedy", icon: <TheaterComedyIcon /> },
   { name: "Gym", icon: <FitnessCenterIcon /> },
-  { name: "mrBeast", icon: <DeveloperModeIcon /> },
-  { name: "Coding", icon: <CodeIcon /> },
+  { name: "Web Development", icon: <DeveloperModeIcon /> },
+  { name: "Javascript", icon: <CodeIcon /> },
   { name: "ReactJS", icon: <CodeIcon /> },
   { name: "NextJS", icon: <CodeIcon /> },
 ];
