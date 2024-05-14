@@ -18,7 +18,7 @@ function Sidebar({ category, setCategory }) {
             className="category-btn"
             key={cat.name}
             style={{
-              background: cat.name === category && "#FC1503",
+              background: cat.name === category && "#C40C0C",
               color: "white",
             }}
             onClick={() => setCategory(cat.name)}

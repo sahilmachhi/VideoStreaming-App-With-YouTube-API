@@ -11,15 +11,25 @@ function VideoDetail() {
   let [videoDetail, setVideoDetail] = useState({});
   let videoId = useParams().id;
   let [videos, setVideos] = useState([]);
-
+  let [profile, setProfile] = useState(null);
+  let [channelId, setChannelId] = useState(null);
   useEffect(() => {
-    fetchFromAPI(`videos?part=snippet,statistics&id=${videoId}`).then((data) =>
-      setVideoDetail(data.items[0])
+    fetchFromAPI(`videos?part=snippet,statistics&id=${videoId}`).then(
+      (data) => {
+        setVideoDetail(data.items[0]);
+        setChannelId(data.items[0].snippet.channelId);
+      }
     );
     fetchFromAPI(
       `search?part=snippet&type=video&relatedToVideoId=${videoId}`
     ).then((data) => setVideos(data.items));
   }, [videoId]);
+
+  useEffect(() => {
+    fetchFromAPI(`channels?part=snippet&id=${channelId}`).then((data) => {
+      setProfile(data.items[0]?.snippet?.thumbnails?.default?.url);
+    });
+  }, [channelId]);
 
   return (
     <>
@@ -45,12 +55,29 @@ function VideoDetail() {
               </Typography>
 
               <Stack
-                direction="row"
+                direction="col"
                 py={1}
                 px={2}
-                justifyContent="space-between"
+                justifyContent="left"
+                alignItems="center"
+                gap={2}
                 sx={{ color: "#fff" }}
               >
+                <Link
+                  to={`/channel/${
+                    videoDetail?.snippet?.channelId
+                      ? videoDetail?.snippet?.channelId
+                      : null
+                  }`}
+                >
+                  {profile ? (
+                    <img
+                      src={profile}
+                      alt="profile photo"
+                      className="size-12 rounded-full"
+                    />
+                  ) : null}
+                </Link>
                 <Link
                   to={`/channel/${
                     videoDetail?.snippet?.channelId

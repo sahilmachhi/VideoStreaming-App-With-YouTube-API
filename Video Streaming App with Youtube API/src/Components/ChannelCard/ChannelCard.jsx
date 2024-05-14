@@ -25,7 +25,10 @@ function ChannelCard({ channelDetail, mt }) {
   return (
     <>
       <Box sx={{ boxShadow: "none", borderRadius: "20px", marginTop: mt }}>
-        <Link to={route ? `/channel/${route}` : `/channel/${route2}`}>
+        <Link
+          to={route ? `/channel/${route}` : `/channel/${route2}`}
+          target="channel_detail"
+        >
           <CardContent className="flex flex-col justify-center text-center text-white">
             {channelDetail?.snippet?.thumbnails?.medium?.url ? (
               <CardMedia
@@ -37,6 +40,7 @@ function ChannelCard({ channelDetail, mt }) {
                   mb: 2,
                   border: "1px solid",
                 }}
+                className="rounded-full"
               />
             ) : null}
             <Typography variant="h6">

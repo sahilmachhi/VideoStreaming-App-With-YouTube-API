@@ -32,7 +32,7 @@ function SearchBar() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <IconButton>
+        <IconButton aria-label="submit-search" id="search-submit">
           <SearchIcon className="text-white" />
         </IconButton>
       </Paper>

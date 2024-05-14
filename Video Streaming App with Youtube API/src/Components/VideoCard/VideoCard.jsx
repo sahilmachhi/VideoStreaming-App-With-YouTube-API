@@ -19,6 +19,7 @@ function VideoCard({ video }) {
         <Link
           className="text-white"
           to={videoId ? `/video/${videoId}` : "/video/noId"}
+          aria-label="play this youtube video"
         >
           <CardMedia
             image={videoDetails?.thumbnails?.high?.url}
@@ -34,16 +35,27 @@ function VideoCard({ video }) {
             className="text-white"
             to={videoId ? `/video/${videoId}` : "/video/noId"}
           >
-            <Typography variant="subtitle1" fontWeight="700" color="#fff">
-              {videoDetails.title.slice(0, 60) || "no Title"}
+            <Typography
+              variant="h2"
+              fontWeight="700"
+              fontSize={18}
+              color="#fff"
+            >
+              {videoDetails.title.slice(0, 54) || "Video Title"}
             </Typography>
           </Link>
           <Link
             className="text-white"
             to={channelId ? `/channel/${channelId}` : "/Channel/noId"}
+            aria-label="go to this youtube channel page"
           >
-            <Typography variant="subtitle2" fontWeight="700" color="#fff">
-              {videoDetails.channelTitle.slice(0, 60) || "no Title"}
+            <Typography
+              variant="body1"
+              fontWeight="700"
+              fontSize={14}
+              color="#fff"
+            >
+              {videoDetails.channelTitle.slice(0, 60) || "Channel Title"}
               <CheckCircle
                 sx={{ fontSize: "1rem", ml: "0.3rem", color: "grey" }}
               />
