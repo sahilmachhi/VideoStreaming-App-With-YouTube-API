@@ -8,21 +8,27 @@ import { CheckCircle } from "@mui/icons-material";
 import Videos from "../Vidoes/Videos";
 
 function VideoDetail() {
+  let [isLoading, setLoading] = useState(true);
   let [videoDetail, setVideoDetail] = useState({});
   let videoId = useParams().id;
   let [videos, setVideos] = useState([]);
   let [profile, setProfile] = useState(null);
   let [channelId, setChannelId] = useState(null);
   useEffect(() => {
+    setLoading(true);
     fetchFromAPI(`videos?part=snippet,statistics&id=${videoId}`).then(
       (data) => {
+        setLoading(false);
         setVideoDetail(data.items[0]);
         setChannelId(data.items[0].snippet.channelId);
       }
     );
     fetchFromAPI(
       `search?part=snippet&type=video&relatedToVideoId=${videoId}`
-    ).then((data) => setVideos(data.items));
+    ).then((data) => {
+      setVideos(data.items);
+      setLoading(false);
+    });
   }, [videoId]);
 
   useEffect(() => {
@@ -135,7 +141,7 @@ function VideoDetail() {
             alignItems="center"
             sx={{ overflowY: "scroll" }}
           >
-            <Videos videos={videos} direction="column" />
+            <Videos videos={videos} direction="column" isLoading={isLoading} />
           </Box>
         </Stack>
       </Box>
