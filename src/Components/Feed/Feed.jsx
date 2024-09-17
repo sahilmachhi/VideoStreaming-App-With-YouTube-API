@@ -1,21 +1,21 @@
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { useParams } from "react-router-dom";
+import Sidebar from "../Sidebar/Sidebar";
 import { Typography } from "@mui/material";
 import Videos from "../Vidoes/Videos";
 import { fetchFromAPI } from "../../Utils/FetchAPI";
 import { useEffect, useState } from "react";
-function SearchFeed() {
-  let searchId = useParams().searchId;
+function Feed() {
   let [isLoading, setLoading] = useState(true);
+  const [category, setCategory] = useState("New");
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     setLoading(true);
-    fetchFromAPI(`search?part=snippet&q=${searchId}`).then((data) => {
+    fetchFromAPI(`search?part=snippet&q=${category}`).then((data) => {
       setVideos(data.items);
       setLoading(false);
     });
-  }, [searchId]);
+  }, [category]);
   return (
     <Stack
       sx={{
@@ -25,10 +25,23 @@ function SearchFeed() {
     >
       <Box
         sx={{
+          height: { sx: "auto", md: "92vh" },
+          borderRight: "1px solid #3d3d3d",
+          padding: {
+            sx: 0,
+            md: 2,
+          },
+          color: "white",
+        }}
+      >
+        <Sidebar category={category} setCategory={setCategory} />
+      </Box>
+      <Box
+        sx={{
           overflowY: "auto",
           height: "90vh",
           flex: 2,
-          paddingLeft: { sm: "2rem", xs: "0.8rem", md: "6rem" },
+          paddingLeft: { sm: "2rem", xs: "0.8rem", md: "2rem" },
         }}
       >
         <Typography
@@ -40,8 +53,8 @@ function SearchFeed() {
             color: "white",
           }}
         >
-          search results for:
-          <span style={{ color: "#F31503" }}> {searchId} </span>
+          {category}
+          <span style={{ color: "#F31503" }}> Videos</span>
         </Typography>
         <Videos videos={videos} isLoading={isLoading} />
       </Box>
@@ -49,4 +62,4 @@ function SearchFeed() {
   );
 }
 
-export default SearchFeed;
+export default Feed;

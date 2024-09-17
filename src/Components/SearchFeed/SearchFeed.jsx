@@ -1,18 +1,22 @@
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import Sidebar from "../Sidebar/Sidebar";
+import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import Videos from "../Vidoes/Videos";
 import { fetchFromAPI } from "../../Utils/FetchAPI";
 import { useEffect, useState } from "react";
-function Feed() {
-  const [category, setCategory] = useState("New");
+function SearchFeed() {
+  let searchId = useParams().searchId;
+  let [isLoading, setLoading] = useState(true);
   const [videos, setVideos] = useState([]);
   useEffect(() => {
-    fetchFromAPI(`search?part=snippet&q=${category}`).then((data) =>
-      setVideos(data.items)
-    );
-  }, [category]);
+    setLoading(true);
+    fetchFromAPI(`search?part=snippet&q=${searchId}`).then((data) => {
+      setVideos(data.items);
+      setLoading(false);
+    });
+  }, [searchId]);
+
   return (
     <Stack
       sx={{
@@ -22,23 +26,10 @@ function Feed() {
     >
       <Box
         sx={{
-          height: { sx: "auto", md: "92vh" },
-          borderRight: "1px solid #3d3d3d",
-          padding: {
-            sx: 0,
-            md: 2,
-          },
-          color: "white",
-        }}
-      >
-        <Sidebar category={category} setCategory={setCategory} />
-      </Box>
-      <Box
-        sx={{
           overflowY: "auto",
           height: "90vh",
           flex: 2,
-          paddingLeft: { sm: "2rem", xs: "0.8rem", md: "2rem" },
+          paddingLeft: { sm: "2rem", xs: "0.8rem", md: "6rem" },
         }}
       >
         <Typography
@@ -50,13 +41,13 @@ function Feed() {
             color: "white",
           }}
         >
-          {category}
-          <span style={{ color: "#F31503" }}> Videos</span>
+          search results for:
+          <span style={{ color: "#F31503" }}> {searchId} </span>
         </Typography>
-        <Videos videos={videos} />
+        <Videos videos={videos} isLoading={isLoading} />
       </Box>
     </Stack>
   );
 }
 
-export default Feed;
+export default SearchFeed;
