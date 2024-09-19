@@ -10,13 +10,17 @@ function ChannelDetail() {
   let id = useParams().id;
   const [channel, setChannel] = useState(null);
   const [videos, setVideos] = useState([]);
+  const [isVideoLoading, setVideoLoading] = useState(true);
+  const [isChannelLoading, setChannelLoading] = useState(true);
 
   useEffect(() => {
     fetchFromAPI(`channels?part=snippet&id=${id}`).then((data) => {
+      setChannelLoading(false);
       setChannel(data.items[0]);
     });
     fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`).then(
       (data) => {
+        setVideoLoading(false);
         setVideos(data.items);
       }
     );
@@ -42,10 +46,14 @@ function ChannelDetail() {
             }}
           />
         </Box>
-        <ChannelCard channelDetail={channel} mt={"-93px"} />
+        <ChannelCard
+          channelDetail={channel}
+          mt={"-93px"}
+          isLoading={isChannelLoading}
+        />
         <Box display="flex" p="2">
           {/* <Box sx={{ mr: { xs: "100px" } }} /> */}
-          <Videos videos={videos} />
+          <Videos videos={videos} isLoading={isVideoLoading} />
         </Box>
       </Box>
     </Container>

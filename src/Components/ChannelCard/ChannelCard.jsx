@@ -1,7 +1,7 @@
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-function ChannelCard({ channelDetail, mt }) {
+function ChannelCard({ channelDetail, mt, isLoading }) {
   let route = channelDetail?.snippet?.channelId;
   let route2;
   if (!route) {
@@ -24,39 +24,66 @@ function ChannelCard({ channelDetail, mt }) {
 
   return (
     <>
-      <Box
-        sx={{
-          boxShadow: "none",
-          borderRadius: "20px",
-          marginTop: mt,
-          width: { md: "330px", lg: "338px", sm: "320px", xs: "280px" },
-        }}
-      >
-        <Link
-          to={route ? `/channel/${route}` : `/channel/${route2}`}
-          target="channel_detail"
+      {isLoading ? (
+        <Box
+          sx={{
+            boxShadow: "none",
+            borderRadius: "20px",
+            marginTop: mt,
+            display: "flex",
+            flexDirection: "column",
+            width: { md: "330px", lg: "338px", sm: "320px", xs: "280px" },
+          }}
         >
           <CardContent className="flex flex-col justify-center text-center text-white items-center">
-            {channelDetail?.snippet?.thumbnails?.medium?.url ? (
-              <CardMedia
-                image={channelDetail?.snippet?.thumbnails?.medium?.url}
-                alt={"name"}
-                sx={{
-                  width: "180px",
-                  height: "180px",
-                  mb: 2,
-                  border: "1px solid",
-                }}
-                className="rounded-full"
-              />
-            ) : null}
-            <Typography variant="h6">
-              {channelDetail?.snippet?.title}
-            </Typography>
-            {subCount ? <Typography>{sub} subscribers</Typography> : null}
+            <CardMedia
+              // image={channelDetail?.snippet?.thumbnails?.medium?.url}
+              alt={"name"}
+              sx={{
+                width: "180px",
+                height: "180px",
+                mb: 2,
+                border: "1px solid",
+                backgroundColor: "white",
+              }}
+              className="rounded-full"
+            />
+            <div className="bg-gray-300 h-[18px] w-60 rounded-md"></div>
+            <div className="bg-gray-300 h-[18px] w-60 rounded-md"></div>
           </CardContent>
-        </Link>
-      </Box>
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            boxShadow: "none",
+            borderRadius: "20px",
+            marginTop: mt,
+            width: { md: "330px", lg: "338px", sm: "320px", xs: "280px" },
+          }}
+        >
+          <Link to={route ? `/channel/${route}` : `/channel/${route2}`}>
+            <CardContent className="flex flex-col justify-center text-center text-white items-center">
+              {channelDetail?.snippet?.thumbnails?.medium?.url ? (
+                <CardMedia
+                  image={channelDetail?.snippet?.thumbnails?.medium?.url}
+                  alt={"name"}
+                  sx={{
+                    width: "180px",
+                    height: "180px",
+                    mb: 2,
+                    border: "1px solid",
+                  }}
+                  className="rounded-full"
+                />
+              ) : null}
+              <Typography variant="h6">
+                {channelDetail?.snippet?.title}
+              </Typography>
+              {subCount ? <Typography>{sub} subscribers</Typography> : null}
+            </CardContent>
+          </Link>
+        </Box>
+      )}
     </>
   );
 }
